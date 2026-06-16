@@ -1,4 +1,6 @@
 <Solution>
-  <Project Path="RegisterUser/RegisterUser.csproj" />
-  <Project Path="SendSmsProject/SendSmsProject.csproj" />
+  <Folder Name="/Direct-Exchange/">
+    <Project Path="RegisterUser/RegisterUser.csproj" />
+    <Project Path="SendSmsProject/SendSmsProject.csproj" />
+  </Folder>
 </Solution>
