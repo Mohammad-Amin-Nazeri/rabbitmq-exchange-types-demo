@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="RegisterUser/RegisterUser.csproj" />
+  <Project Path="SendSmsProject/SendSmsProject.csproj" />
+</Solution>
