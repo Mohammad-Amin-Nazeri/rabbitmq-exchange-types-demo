@@ -1,5 +1,4 @@
-﻿using System.Reflection.Metadata;
-using System.Text;
+﻿using System.Text;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -14,11 +13,14 @@ var connectionFactory = new ConnectionFactory
     UserName = "guest",
     Password = "guest"
 };
-var connection = await connectionFactory.CreateConnectionAsync();
-var model = await connection.CreateChannelAsync();
+
+await using var connection = await connectionFactory.CreateConnectionAsync();
+await using var model = await connection.CreateChannelAsync();
+
 await model.QueueDeclareAsync(queueName, true, false, false, null);
 await model.ExchangeDeclareAsync(exchangeName, ExchangeType.Topic, true);
 
+// "*" matches exactly one word, so this matches keys like "User.registered"
 await model.QueueBindAsync(queueName, exchangeName, "*.registered");
 
 var consumer = new AsyncEventingBasicConsumer(model);
@@ -31,10 +33,12 @@ consumer.ReceivedAsync += async (sender, args) =>
     if (user != null)
     {
         Console.WriteLine("Send Sms For " + user.PhoneNumber);
-
     }
+
+    await Task.CompletedTask;
 };
 
 await model.BasicConsumeAsync(queueName, true, consumer);
 
-Console.Read();
+Console.WriteLine("Waiting for messages. Press Enter to exit.");
+Console.ReadLine();

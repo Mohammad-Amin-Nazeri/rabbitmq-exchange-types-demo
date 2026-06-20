@@ -1,6 +1,4 @@
-﻿//
-
-using System.Text;
+﻿using System.Text;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using Utils;
@@ -20,15 +18,16 @@ var connectionFactory = new ConnectionFactory
     UserName = "guest",
     Password = "guest"
 };
-var connection = await connectionFactory.CreateConnectionAsync();
-var model = await connection.CreateChannelAsync();
-await model.QueueDeclareAsync(queueName, true, false, false, null);
 
+await using var connection = await connectionFactory.CreateConnectionAsync();
+await using var model = await connection.CreateChannelAsync();
+
+await model.QueueDeclareAsync(queueName, true, false, false, null);
 await model.ExchangeDeclareAsync(exchangeName, ExchangeType.Topic, true);
 
 if (phoneNumber != null)
 {
-    var user = new User()
+    var user = new User
     {
         Email = email ?? "",
         PhoneNumber = phoneNumber,
@@ -36,6 +35,8 @@ if (phoneNumber != null)
 
     var userConverted = JsonConvert.SerializeObject(user);
     var body = Encoding.UTF8.GetBytes(userConverted);
+
+    // Routing key "User.registered" matches both "User.*" and "*.registered" bindings
     await model.BasicPublishAsync(exchangeName, "User.registered", body);
 }
 
