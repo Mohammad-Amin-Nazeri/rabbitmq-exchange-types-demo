@@ -3,4 +3,10 @@
     <Project Path="Direct-Exchange/RegisterUser.Direct/RegisterUser.Direct.csproj" Id="89e9a1a9-6dbf-4ee9-97f1-4efd5b498b5e" />
     <Project Path="Direct-Exchange/SendSms.Direct/SendSms.Direct.csproj" Id="202e0b41-4ef2-4e5f-b4e1-7b6c7ca41152" />
   </Folder>
+  <Folder Name="/Fanout-Exchange/">
+    <Project Path="Fanout-Exchange/RegisterUser.Fanout/RegisterUser.Fanout.csproj" Id="eea8d471-5167-42fd-9049-e65fafdda1f5" />
+    <Project Path="Fanout-Exchange/SendEmail.Fanout/SendEmail.Fanout.csproj" Id="42a3d045-c484-4d41-9ce2-45281ca00050" />
+    <Project Path="Fanout-Exchange/SendSms.Fanout/SendSms.Fanout.csproj" Id="6eb7c73a-724d-4af6-8700-54acf81f9461" />
+  </Folder>
+  <Project Path="Utils/Utils.csproj" Id="76b35c8e-284c-40f7-844f-c5d5986e5012" />
 </Solution>
