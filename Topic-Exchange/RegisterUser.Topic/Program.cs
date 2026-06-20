@@ -6,7 +6,7 @@ using RabbitMQ.Client;
 using Utils;
 
 var queueName = "register-User";
-var exchangeName = "User-Registerd";
+var exchangeName = "User";
 
 Console.Write("Enter Your PhoneNumber :");
 var phoneNumber = Console.ReadLine();
@@ -23,19 +23,20 @@ var connectionFactory = new ConnectionFactory
 var connection = await connectionFactory.CreateConnectionAsync();
 var model = await connection.CreateChannelAsync();
 await model.QueueDeclareAsync(queueName, true, false, false, null);
-await model.ExchangeDeclareAsync(exchangeName, ExchangeType.Fanout, true);
+
+await model.ExchangeDeclareAsync(exchangeName, ExchangeType.Topic, true);
 
 if (phoneNumber != null)
 {
     var user = new User()
     {
-        Email = email?? "",
+        Email = email ?? "",
         PhoneNumber = phoneNumber,
     };
 
     var userConverted = JsonConvert.SerializeObject(user);
     var body = Encoding.UTF8.GetBytes(userConverted);
-    await model.BasicPublishAsync(exchangeName, "", body);
+    await model.BasicPublishAsync(exchangeName, "User.registered", body);
 }
 
 Console.WriteLine(phoneNumber);

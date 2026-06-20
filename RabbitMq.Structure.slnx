@@ -8,5 +8,10 @@
     <Project Path="Fanout-Exchange/SendEmail.Fanout/SendEmail.Fanout.csproj" Id="42a3d045-c484-4d41-9ce2-45281ca00050" />
     <Project Path="Fanout-Exchange/SendSms.Fanout/SendSms.Fanout.csproj" Id="6eb7c73a-724d-4af6-8700-54acf81f9461" />
   </Folder>
+  <Folder Name="/Topic-Exchange/">
+    <Project Path="Topic-Exchange/RegisterUser.Topic/RegisterUser.Topic.csproj" Id="0594da28-6694-4c0d-9742-7ee644fd64c1" />
+    <Project Path="Topic-Exchange/SendEmail.Topic/SendEmail.Topic.csproj" Id="8ccf5647-c33e-4ce2-b1c5-8f820772a86e" />
+    <Project Path="Topic-Exchange/SendSms.Topic/SendSms.Topic.csproj" Id="5c9fcdf2-a762-440f-a222-586696ca5f7f" />
+  </Folder>
   <Project Path="Utils/Utils.csproj" Id="76b35c8e-284c-40f7-844f-c5d5986e5012" />
 </Solution>
